@@ -22,10 +22,32 @@ public class PageController {
 		//page used in the dispatcher-servlet.xml file to get view (jsp file)page.jsps
 		ModelAndView mv= new ModelAndView("page");
 		//to add parameter to Model (Array), then we can read it from page.jsp page
-		mv.addObject("greeting","Welcome to spring Web MVC from model and view method in controller");
+//		mv.addObject("greeting","Welcome to spring Web MVC from model and view method in controller");
+		mv.addObject("title","HOME");
+		mv.addObject("userClickHome",true);
 		return mv;
 	}
 	
+	@RequestMapping(value={"/about"})
+	public ModelAndView about(){
+		//page used in the dispatcher-servlet.xml file to get view (jsp file)page.jsps
+		ModelAndView mv= new ModelAndView("page");
+		//to add parameter to Model (Array), then we can read it from page.jsp page
+		mv.addObject("title","About Us");
+		mv.addObject("userClickAbout",true);
+		return mv;
+	}
+	
+	@RequestMapping(value={"/contact"})
+	public ModelAndView contact(){
+		//page used in the dispatcher-servlet.xml file to get view (jsp file)page.jsps
+		ModelAndView mv= new ModelAndView("page");
+		//to add parameter to Model (Array), then we can read it from page.jsp page
+		mv.addObject("title","Contact Us");
+		mv.addObject("userClickContact",true);
+		
+		return mv;
+	}
 	
 	
 	
