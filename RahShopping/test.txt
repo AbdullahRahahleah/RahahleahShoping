@@ -1,0 +1,11 @@
+Process is 
+1- Front controller (Dispatcher servlet) as defined in web.xml
+2- Get handler (controller class) as we defined it as controller then we get the method handler
+3- Inject beans to the view.
+
+Using bootstrap part 02-05 
+1- Download bootstrap files and insert them into webapp folder (assets) and extract them (css,fonts,js)
+2- Get bootstrap templates from https://startbootstrap.com/template-categories/unstyled/
+3- get (Jquery to jquery.jsp, custom-css to app.css,
+4- in dispatcher-servlet you need to add mvc namespace
+ 
