@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Online shopping</title>
 </head>
-<body>
+<body>s
 	${contextRoot} says - ${greeting}
 </body>
 </html>
