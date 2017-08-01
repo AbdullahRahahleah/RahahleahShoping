@@ -23,7 +23,7 @@ public class PageController {
 		ModelAndView mv= new ModelAndView("page");
 		//to add parameter to Model (Array), then we can read it from page.jsp page
 //		mv.addObject("greeting","Welcome to spring Web MVC from model and view method in controller");
-		mv.addObject("title","HOME");
+		mv.addObject("title","Home");
 		mv.addObject("userClickHome",true);
 		return mv;
 	}

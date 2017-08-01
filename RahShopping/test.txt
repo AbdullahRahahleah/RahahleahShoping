@@ -8,4 +8,5 @@ Using bootstrap part 02-05
 2- Get bootstrap templates from https://startbootstrap.com/template-categories/unstyled/
 3- get (Jquery to jquery.jsp, custom-css to app.css,
 4- in dispatcher-servlet you need to add mvc namespace
- 
+
+*you can use the site (bootswatch.com) to get bootstrap themes
