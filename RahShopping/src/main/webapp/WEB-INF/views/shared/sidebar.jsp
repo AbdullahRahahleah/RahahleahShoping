@@ -1,8 +1,8 @@
 <p class="lead">Shop Name</p>
 <div class="list-group">
 
-	<c:forEach items="${catagories}" var ="catagory">
-		<a href="${contextRoot}/show/catagory/${catagory.id}/products" class="list-group-item" id="a_${catagory.name}">${catagory.name}</a> 		
+	<c:forEach items="${catagories}" var ="category">
+		<a href="${contextRoot}/show/category/${category.id}/products" class="list-group-item" id="a_${category.name}">${category.name}</a> 		
 	</c:forEach>
 	
 

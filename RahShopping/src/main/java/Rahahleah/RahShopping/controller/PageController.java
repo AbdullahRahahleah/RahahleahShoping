@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import Rahahleah.shopingbackend.dto.Catagory;
-import Rahahleah.shoppingbackend.dao.CatagoryDAO;
+import Rahahleah.shopingbackend.dto.Category;
+import Rahahleah.shoppingbackend.dao.CategoryDAO;
 
 
 //THis class named handler
@@ -18,7 +18,7 @@ import Rahahleah.shoppingbackend.dao.CatagoryDAO;
 public class PageController {
 	
 	@Autowired
-	private CatagoryDAO catagoryDAO;
+	private CategoryDAO categoryDAO;
 	
 	
 	//here we used same method to handle various url mapping
@@ -35,7 +35,7 @@ public class PageController {
 		mv.addObject("title","Home");
 		
 		//passing the list of catagories
-		mv.addObject("catagories",catagoryDAO.list());
+		mv.addObject("catagories",categoryDAO.list());
 		
 		
 		mv.addObject("userClickHome",true);
@@ -64,37 +64,37 @@ public class PageController {
 	}
 	
 	/*
-	 * Methods to load all the products and based on catagory
+	 * Methods to load all the products and based on category
 	 */
 	@RequestMapping(value={"/show/all/products"})
 	public ModelAndView showAllProducts(){
 		ModelAndView mv= new ModelAndView("page");
 		mv.addObject("title","All Products");
 		
-		//passing the list of catagories
-		mv.addObject("catagories",catagoryDAO.list());
+		//passing the list of catagories from DB
+		mv.addObject("catagories",categoryDAO.list());
 	
 		mv.addObject("userClickAllProducts",true);
 		return mv;
 	}
 	
-	@RequestMapping(value={"/show/catagory/{id}/products"})
-	public ModelAndView showCatagoryProducts(@PathVariable("id") int id){
+	@RequestMapping(value={"/show/category/{id}/products"})
+	public ModelAndView showCategoryProducts(@PathVariable("id") int id){
 		ModelAndView mv= new ModelAndView("page");
 		
-		//catagaroyDAO to fetch a signle catagory
-		Catagory catagory=null;
-		catagory=catagoryDAO.get(id);
+		//catagaroyDAO to fetch a signle category
+		Category category=null;
+		category=categoryDAO.get(id);
 		
-		mv.addObject("title",catagory.getName());
+		mv.addObject("title",category.getName());
 		
-		//passing the list of catagories
-		mv.addObject("catagories",catagoryDAO.list());
+		//passing the list of catagories, in this case it's reading the values from the DB's
+		mv.addObject("catagories",categoryDAO.list());
 	
-		//passing the single catagory object
-		mv.addObject("catagory", catagory);
+		//passing the single category object
+		mv.addObject("category", category);
 		
-		mv.addObject("userClickCatagoryProducts",true);
+		mv.addObject("userClickCategoryProducts",true);
 		return mv;
 	}
 	
@@ -132,6 +132,7 @@ public class PageController {
 		return mv;
 	}
 	*/
+	
 	
 	
 }

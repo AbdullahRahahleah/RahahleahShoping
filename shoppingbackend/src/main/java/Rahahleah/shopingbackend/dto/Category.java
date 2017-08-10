@@ -1,7 +1,15 @@
 package Rahahleah.shopingbackend.dto;
 
-public class Catagory {
-	
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+//
+
+@Entity
+public class Category {
 	public int getId() {
 		return id;
 	}
@@ -37,11 +45,33 @@ public class Catagory {
 	/*
 	 * Private fields 
 	 */
+	
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private int id;
+	
+	// we don't mention the name of the related column as they have the same name 
 	private String name;
+	
 	private String description;
+	
+	//here we mentioned the name of the column on the database
+	@Column(name="IMAGE_URL")
 	private String imageURL;
+	
+	
+	@Column(name="is_active")
 	private boolean active=true;
+
+
+	
+	
+	//just for validation 
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", imageURL=" + imageURL
+				+ ", active=" + active + "]";
+	}
 	
 	
 	

@@ -2,11 +2,16 @@ package Rahahleah.shoppingbackend.dao;
 
 import java.util.List;
 
-import Rahahleah.shopingbackend.dto.Catagory;
+import Rahahleah.shopingbackend.dto.Category;
 
-public interface CatagoryDAO {
+public interface CategoryDAO {
 
-	List<Catagory> list();
-	Catagory get(int id);
 	
+	
+	List<Category> list();
+	Category get(int id);
+	
+	boolean add(Category category);
+	boolean update(Category category);
+	boolean delete(Category category);
 }

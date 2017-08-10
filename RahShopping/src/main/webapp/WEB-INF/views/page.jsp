@@ -23,7 +23,8 @@
 <title>Online Shopping - ${title}</title>
 
 <script>
-	window.menu = '${title}'
+	window.menu = '${title}';
+	window.contextRoot='${contextRoot}'
 </script>
 
 
@@ -33,6 +34,8 @@
 <!-- Bootstrap Readable theme (added from bootswatch.com)-->
 <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
 
+<!-- Bootstrap for tables from (Datatables)-->
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
 
 
@@ -72,7 +75,7 @@
 			
 			
 			<!--  Load only when user clicks contact -->
-			<c:if test="${userClickAllProducts ==true or userClickCatagoryProducts==true}">
+			<c:if test="${userClickAllProducts ==true or userClickCategoryProducts==true}">
 				<%@include file="listProducts.jsp"%>
 			</c:if>
 			
@@ -87,6 +90,12 @@
 
 		<!-- Bootstrap Core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>
+	
+		<!--  Jquery Data table plugin from https://www.datatables.net -->
+		<script src="${js}/jquery.dataTables.js"></script>
+
+		<!--  DataTable Bootstrap script -->
+		<script src="${js}/dataTables.bootstrap.js"></script>
 
 
 		<!--  Self coded javaScript -->
