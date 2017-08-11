@@ -12,7 +12,8 @@
    http://www.springframework.org/schema/mvc
    http://www.springframework.org/schema/mvc/spring-mvc.xsd  
    ">
-	<context:component-scan base-package="Rahahleah.RahShopping.controller"></context:component-scan>
+   <!--  To scan every component  -->
+	<context:component-scan base-package="Rahahleah.RahShopping"></context:component-scan>
 	<context:component-scan base-package="Rahahleah.shoppingbackend"></context:component-scan>
 	
 	<bean id="viewResolver"

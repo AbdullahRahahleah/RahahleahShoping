@@ -1,13 +1,18 @@
 package Rahahleah.RahShopping.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import Rahahleah.RahShopping.exception.ProductNotFoundException;
 import Rahahleah.shopingbackend.dto.Category;
+import Rahahleah.shopingbackend.dto.Product;
 import Rahahleah.shoppingbackend.dao.CategoryDAO;
+import Rahahleah.shoppingbackend.dao.ProductDAO;
 
 
 //THis class named handler
@@ -17,8 +22,15 @@ import Rahahleah.shoppingbackend.dao.CategoryDAO;
 @Controller
 public class PageController {
 	
+	//used to add logs 
+	private static final Logger logger =LoggerFactory.getLogger(PageController.class);
+	
+	
 	@Autowired
 	private CategoryDAO categoryDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
 	
 	
 	//here we used same method to handle various url mapping
@@ -33,6 +45,10 @@ public class PageController {
 		//to add parameter to Model (Array), then we can read it from page.jsp page
 //		mv.addObject("greeting","Welcome to spring Web MVC from model and view method in controller");
 		mv.addObject("title","Home");
+		
+		//test to Add logs
+		logger.info("Inside page controller Index method-Info");
+		logger.debug("Inside page controller Index method-Debug");
 		
 		//passing the list of catagories
 		mv.addObject("catagories",categoryDAO.list());
@@ -98,8 +114,24 @@ public class PageController {
 		return mv;
 	}
 	
-	
-	
+	/*
+	 * Viewing Single Product
+	 */
+	@RequestMapping(value="/show/{id}/product")
+	public ModelAndView showSingleProduct(@PathVariable("id") int id) throws ProductNotFoundException{
+		ModelAndView mv= new ModelAndView("page");
+		Product product =productDAO.get(id);
+		if(product==null)
+			throw new ProductNotFoundException();
+		product.setViews(product.getViews()+1);	
+		productDAO.update(product);
+		
+		mv.addObject("title",product.getName());
+		mv.addObject("product",product);		
+		mv.addObject("userClickShowProduct", true);
+			
+		return mv;		
+	}
 	
 	/*
 	 * Those are examples to use path variable and Requestparam video 02-04 

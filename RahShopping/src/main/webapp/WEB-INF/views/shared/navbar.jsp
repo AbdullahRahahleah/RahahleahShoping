@@ -18,8 +18,6 @@
                         <a href="${contextRoot}/about">About</a>
                     </li >
                     
-
-                    
                     <li id ="contact">
                         <a href="${contextRoot}/contact">Contact</a>
                     </li>

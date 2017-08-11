@@ -112,10 +112,10 @@ public class Product {
 	public void setPurchases(int purchases) {
 		this.purchases = purchases;
 	}
-	public int getView() {
+	public int getViews() {
 		return views;
 	}
-	public void setView(int view) {
+	public void setViews(int view) {
 		this.views = view;
 	}
 	@Override
