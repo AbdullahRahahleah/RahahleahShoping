@@ -2,6 +2,7 @@ $(function() {
 	// selecting the active menu (menu=title as mentioned in page.jsp) and
 	// "title filled in java code while the active class for
 	// the correponding ID which defined in many jsps(like navbar)
+	//Menu = title (read from controller) AND (#ID read from navbar)
 	switch (menu) {
 	case 'About Us':
 		$('#about').addClass('active');
@@ -14,6 +15,9 @@ $(function() {
 	case 'All Products':
 		$('#listProducts').addClass('active');
 		break;
+	case 'Manage Products':
+		$('#ManageProducts').addClass('active');
+		break;	
 
 	default:
 		if (menu == 'HOME')
@@ -89,7 +93,13 @@ $(function() {
 					},
 
 					{
-						data:'quantity'
+						data:'quantity',
+						mRender: function(data,type,row) {
+							if(data<1) {
+								return '<span style ="color:red">Out Of stock!</span>';							
+							}
+							return data;							
+						}
 					},
 					{
 						data: 'id',
@@ -100,7 +110,15 @@ $(function() {
 							var str='';
 							//&#160 =space
 							str +='<a href="'+window.contextRoot+'/show/'+data+'/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
-							str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+							
+							if(row.quantity <1) {
+								str +='<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+							}
+							else {
+								str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';	
+							}
+							
+							
 							return str;
 							
 						}

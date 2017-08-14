@@ -16,7 +16,7 @@ public class Product {
 	
 	//Costructure to set defatult value 
 	public Product() {
-		this.code="PRD"+UUID.randomUUID().toString().substring(26);
+		this.code="PRD"+ UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 	
 	//private fields
@@ -46,6 +46,10 @@ public class Product {
 	private int supplierId;
 	private int purchases;
 	private int views;
+	
+
+	
+	
 	public int getId() {
 		return id;
 	}

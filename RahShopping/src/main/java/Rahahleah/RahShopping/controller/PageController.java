@@ -50,8 +50,8 @@ public class PageController {
 		logger.info("Inside page controller Index method-Info");
 		logger.debug("Inside page controller Index method-Debug");
 		
-		//passing the list of catagories
-		mv.addObject("catagories",categoryDAO.list());
+		//passing the list of categories
+		mv.addObject("categories",categoryDAO.list());
 		
 		
 		mv.addObject("userClickHome",true);
@@ -87,8 +87,8 @@ public class PageController {
 		ModelAndView mv= new ModelAndView("page");
 		mv.addObject("title","All Products");
 		
-		//passing the list of catagories from DB
-		mv.addObject("catagories",categoryDAO.list());
+		//passing the list of categories from DB
+		mv.addObject("categories",categoryDAO.list());
 	
 		mv.addObject("userClickAllProducts",true);
 		return mv;
@@ -104,8 +104,8 @@ public class PageController {
 		
 		mv.addObject("title",category.getName());
 		
-		//passing the list of catagories, in this case it's reading the values from the DB's
-		mv.addObject("catagories",categoryDAO.list());
+		//passing the list of categories, in this case it's reading the values from the DB's
+		mv.addObject("categories",categoryDAO.list());
 	
 		//passing the single category object
 		mv.addObject("category", category);
