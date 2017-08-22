@@ -128,5 +128,15 @@ $(function() {
 		});
 
 	}
+	
+	//dismissing the alert after 3 seconds (used in the manageproducts.jsp)
+	//here we're dealing with  alert class
+	var $alert = $('.alert');
+	if($alert.length) {
+		setTimeout(function() {
+			$alert.fadeOut('slow');
+			
+		},3000)
+	}
 
 });

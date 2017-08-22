@@ -1,6 +1,22 @@
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="container">
 	<div class="row">
+	
+	<!--  message read from managmentcontroller.java (message =Product submitted successfully !) -->
+	<c:if test="${not empty message}" >
+	<div class="col-xs-12"> 	
+		<div class="alert alert-success alert-dimissible">
+		<!--  time filled in myaoo.js -->
+			<button type ="button" class="close" data-dismiss="alert">%times;</button>
+			${message}
+		</div>
+	</div>
+	
+	
+	</c:if>
+	
+	
+	
 		<div class="col-md-offset-2 col-md-8">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -9,7 +25,11 @@
 				<div class="panel-body">
 					<!-- Form elements -->
 					<!--  spring  will link nproduct from managmentcontroller.java with (product) in the modelAttribute-->
-					<sf:form class="form-horizontal" modelAttribute="product"> 
+					<!--  The action will forward you to ManagmentController.java then to post method as we defined it bellow -->
+					<sf:form class="form-horizontal" modelAttribute="product"
+					action ="${contextRoot}/manage/products"
+					method="POST"
+					> 
 						<div class="form-group">
 							<label class="control-label col-md-4" for="name">EnterProduct Name: </label>
 							<div class="col-md-8">
@@ -32,22 +52,19 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4" for="unitPrice">Enter
-								Unit Price: </label>
+							<label class="control-label col-md-4" for="unitPrice">Enter	Unit Price: </label>
 							<div class="col-md-8">
 								<sf:input type="number" path="unitPrice" id="unitPrice"	placeholder="Unit Price in &#8364;" class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4" for="quantity">Quantity
-								Availabe : </label>
+							<label class="control-label col-md-4" for="quantity">Quantity Availabe : </label>
 							<div class="col-md-8">
 								<sf:input type="number" path="quantity" id="quantity" placeholder="Quantity Available" class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4" for="categoryId">Select
-								Category : </label>
+							<label class="control-label col-md-4" for="categoryId">Select Category : </label>
 							<div class="col-md-8">
 								<sf:select class="form-control" id="categoryId" path="categoryId"
 								items="${categories}"

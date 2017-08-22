@@ -1,5 +1,5 @@
 Process is 
-1- Front controller (Dispatcher servlet) as defined in web.xml
+1- Front controller (Dispatcher servlet) as defined in web.xml 
 2- Get handler (controller class) as we defined it as controller then we get the method handler
 3- Inject beans to the view.
 
