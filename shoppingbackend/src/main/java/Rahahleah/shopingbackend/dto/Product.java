@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,12 +30,17 @@ public class Product {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private int id;
 	private String code;
+	//this is a validation added to Entity
+	@NotBlank(message="Please enter the Product name !")
 	private String name;
+	@NotBlank(message="Please enter the Brand name !")
 	private String brand;
 	//To stop showing this variable value when you convert it to JSON
 	@JsonIgnore
+	@NotBlank (message="Please enter the Product Description")
 	private String description;
 	@Column(name="unit_price")
+	@Min(value=1, message ="The price cann't be less than 1")
 	private double unitPrice;
 	private int quantity;
 	@Column(name="is_active")

@@ -6,7 +6,7 @@
 	<c:if test="${not empty message}" >
 	<div class="col-xs-12"> 	
 		<div class="alert alert-success alert-dimissible">
-		<!--  time filled in myaoo.js -->
+		<!--  time filled in myapp.js (alert) -->
 			<button type ="button" class="close" data-dismiss="alert">%times;</button>
 			${message}
 		</div>
@@ -35,6 +35,7 @@
 							<div class="col-md-8">
 							<!--  path attribute here mathched with the field name in the product.java -->
 								<sf:input type="text" path="name" id="name"	placeholder="Proruct Name" class="form-control" />
+								<sf:errors path="name" cssClass="help-block" element="em"/>
 								<!--  em:emphasized text <em class="help-block">Please enter Product Name!</em> -->
 							</div>
 						</div>
@@ -42,6 +43,8 @@
 							<label class="control-label col-md-4" for="brand">Enter	Brand Name: </label>
 							<div class="col-md-8">
 								<sf:input type="text" path="brand" id="brand"	placeholder="Brand Name" class="form-control" />
+								<sf:errors path="brand" cssClass="help-block" element="em"/>
+								
 								<!--  em:emphasized text <em class="help-block">Please enter Brand Name!</em> -->
 							</div>
 						</div>
@@ -49,12 +52,14 @@
 							<label class="control-label col-md-4" for="description">Product	Description: </label>
 							<div class="col-md-8">
 								<sf:textarea path="description" id="description" placeholder="Write a description" class="form-control" rows="4"/>
+							<sf:errors path="description" cssClass="help-block" element="em"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-4" for="unitPrice">Enter	Unit Price: </label>
 							<div class="col-md-8">
 								<sf:input type="number" path="unitPrice" id="unitPrice"	placeholder="Unit Price in &#8364;" class="form-control" />
+							<sf:errors path="unitPrice" cssClass="help-block" element="em"/>
 							</div>
 						</div>
 						<div class="form-group">
