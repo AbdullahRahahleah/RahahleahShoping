@@ -2,6 +2,7 @@ package Rahahleah.RahShopping.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import Rahahleah.RahShopping.util.FileUploadUtility;
+import Rahahleah.RahShopping.validator.ProductValidator;
 import Rahahleah.shopingbackend.dto.Category;
 import Rahahleah.shopingbackend.dto.Product;
 import Rahahleah.shoppingbackend.dao.CategoryDAO;
@@ -43,13 +46,14 @@ public class ManagmentController {
 		mv.addObject("userClickManageProducts", true);
 		mv.addObject("title", "Manage Products");
 		
-		//to add product
+		//This is just to generate a constructor to use it in the manageproduct.jsp form to fill it, then you can use it by post method
 		Product nProduct=new Product();
 		nProduct.setSupplierId(1);
 		nProduct.setActive(true);
+		//here we define our class (product) in manageproduct.jsp using modelAttribute="product" 
 		mv.addObject("product", nProduct);
 		
-		//in this case I came from Post method
+		//in this case I came from Post method just to print this message 
 		if(operation!=null) {
 			if(operation.equals("product")) {
 				mv.addObject("message", "Product submitted successfully !");
@@ -63,7 +67,13 @@ public class ManagmentController {
 	
 	//handling product submission from manageProducts.jsp (action ="${contextRoot}/manage/products") and values filled in the mproduct object according to path parameters
 	@RequestMapping(value="/products",method=RequestMethod.POST)
-	public String handleProductSubmission(@Valid @ModelAttribute("product") Product mproduct,BindingResult results, Model model){
+	public String handleProductSubmission(@Valid @ModelAttribute("product") Product mProduct,BindingResult results, Model model,
+			HttpServletRequest request ){
+		
+		//to Add spring validator on the uploaded file using (productValidator.java)
+		new ProductValidator().validate(mProduct, results);
+				
+		
 		//check if there are any errors from validation which we put in proudct.java class @NotBlank..etc
  		if(results.hasErrors()){
 			model.addAttribute("userClickManageProducts", true);
@@ -72,11 +82,22 @@ public class ManagmentController {
 			return "page";
 		}
 		
-		logger.info(mproduct.toString());
+		logger.info(mProduct.toString());
 		
 		//create a new product record
-		productDAO.add(mproduct);
-		//redirect to Get method (Above)
+		productDAO.add(mProduct);
+		
+		
+		//Just to check we have attached a file then attach the file using our method 
+		if(!mProduct.getFile().getOriginalFilename().equals("")) {
+			
+			FileUploadUtility.uploadFile(request,mProduct.getFile(),mProduct.getCode());
+			
+		}
+		
+		
+		
+		//redirect to Get method (Above) to display the message (product submitted correctly )
 		return "redirect:/manage/products?operation=product";
 	}
 	

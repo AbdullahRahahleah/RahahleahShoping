@@ -7,7 +7,7 @@
 	<div class="col-xs-12"> 	
 		<div class="alert alert-success alert-dimissible">
 		<!--  time filled in myapp.js (alert) -->
-			<button type ="button" class="close" data-dismiss="alert">%times;</button>
+			<button type ="button" class="close" data-dismiss="alert">&times;</button>
 			${message}
 		</div>
 	</div>
@@ -74,6 +74,7 @@
 							<label class="control-label col-md-4" for="file">Select an Image : </label>
 							<div class="col-md-8">
 								<sf:input type="file" path="file" id="file"  class="form-control" />
+								<sf:errors path="file" cssClass="help-block" element="em"/>
 							</div>
 						</div>
 						
