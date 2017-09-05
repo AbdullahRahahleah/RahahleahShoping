@@ -27,6 +27,10 @@ import Rahahleah.shoppingbackend.dao.CategoryDAO;
 import Rahahleah.shoppingbackend.dao.ProductDAO;
 
 
+//the diffrence between pathVariable and ModelAttribute is :
+// in pathVaribale we we read the paremeter from URL which defined in the requestMappting like {id}
+// while in ModelAttribute we read the object which we inserted in the form definition in JSP with the same used name like <sf:form ModalAttribute="category" 
+
 @Controller
 @RequestMapping("/manage")
 public class ManagmentController {
@@ -59,7 +63,9 @@ public class ManagmentController {
 		if(operation!=null) {
 			if(operation.equals("product")) {
 				mv.addObject("message", "Product submitted successfully !");
-				
+			}
+			else if(operation.equals("category")) {
+				mv.addObject("message", "Category submitted successfully !");				
 			}
 		}
 		
@@ -144,6 +150,23 @@ public class ManagmentController {
 	public List<Category> getCategories() {
 		return categoryDAO.list();
 	}
+	
+	//to be used in the manageproducts.jsp to add a new category from modal form
+	//here we created a new object of type category to use it in add new category form
+	@ModelAttribute("category")
+	public Category getCategory() {
+		return new Category();
+	}
+	
+	
+	//to handle category submission from manageproduct (submit) action
+	@RequestMapping(value="/category",method=RequestMethod.POST)
+	public String handleCategorySubmission(@ModelAttribute Category category) {
+		categoryDAO.add(category);		
+		return "redirect:/manage/products/?operation=category";
+	}
+	
+	
 	
 	// here to show the product in edit mode in manage product
 	@RequestMapping(value="/{id}/product",method=RequestMethod.GET)
