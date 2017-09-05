@@ -138,5 +138,140 @@ $(function() {
 			
 		},3000)
 	}
+	
+	//--------------
+	//here we are using jquery and bootboxjs
+	//to read checkbox from manageproducts checkbox because we define a toggle button with class="switch"
+	
+	//-------
+	// Data table for Admin
+	//-------
+	//table name got from manageproducts.jsp
+	var $adminProductstable = $('#adminProductsTable');
+	// execute bellow code only where we have this table, which means when we opens this page and this variable loaded
+	if ($adminProductstable.length) {
+		var jsonUrl=window.contextRoot+'/json/data/admin/all/products';
+	
+		//console.log('inside the table ! ');
+		$adminProductstable.DataTable ( {
+			//how many records per page
+			lengthMenu: [[10,30,50,-1],['10 Records', '30 Records', '50 Records','All']],
+			//page length
+			pageLength: 30,
+			//this if you want to insert them manually 
+			//data: products
+			//else (using json)
+			ajax: {
+				url:jsonUrl,
+				dataSrc:''
+			},
+			columns: [
+			         {
+			        	 data:'id'
+			         }, 
+					{
+						data:'code',
+						mRender: function(data,type,row) {
+							return '<img src="'+window.contextRoot+'/resources/images/'+data+'.jpg" class="adminDataTableImg" />';
+						}
+						
+					},
+					{
+						//same name in Json
+						data:'name'
+					},
 
+					{
+
+						data:'brand'
+					},
+					{
+						data:'quantity',
+						mRender: function(data,type,row) {
+							if(data<1) {
+								return '<span style ="color:red">Out Of stock!</span>';							
+							}
+							return data;							
+						}
+					},
+					{
+						data:'unitPrice',
+						//to Display the row in customized view we used mRender property
+						mRender: function (data,type,row) {
+							return '&#8364; '+data
+						}
+						
+					},
+					{
+						data: 'active',
+						bSortable:false,
+						mRender:function(data,type,row){
+							var str='';
+									str += '<label class="switch">';
+									//means if the product is active then add a checked else don't insert checked
+									if(data){
+										str += '<input type="checkbox" checked="checked" value="'+ row.id + '"/>';
+									}
+									else {
+										str += '<input type="checkbox"  value="'+ row.id + '"/>';
+									}
+									str += '<div class="slider"></div> </label>';
+									return str;	
+						}
+						
+					},
+					{
+						data:'id',
+						bSortable:false,
+						mRender:function(data,type,row) {
+							var str='';
+							//we can't read the context root by ${contextRoot} it's just read in this way in jsp file
+							str+='<a href="'+window.contextRoot+'/manage/'+data+'/product" class="btn btn-warning">';
+				 			str+='<span class="glyphicon glyphcon-pencil"><</span></a>';
+				 			return str;
+						}
+					}
+			],
+			initComplete:function() {
+				var api=this.api();
+				api.$('.switch input[type="checkbox"]').on('change',function() {
+					
+					var checkbox=$(this);
+					var checked= checkbox.prop('checked');
+					var dMsg=(checked)?'You want to activate that product?':'you want to deactivate that product?';
+					var value=checkbox.prop('value');
+					
+					bootbox.confirm({
+						size:'medium',
+						title:'Proudct Activation & Deactivation',
+						message:dMsg,
+						callback:function(confirmed){
+							//if user clicked on ok or cancel
+							if(confirmed) {
+							console.log(value);
+							// added to handle activation and deactivation, this method will be handled by managmentcontroller.java with post method
+							var activationUrl=window.contextRoot+'/manage/product/'+value+'/activation';
+							$.post(activationUrl,function(data){
+								bootbox.alert({
+									size:'medium',
+									title:'Information',
+									message:data
+								});	
+							});
+							
+							
+							}
+							else {
+								checkbox.prop('checked',!checked);
+							}
+						}
+					})	
+				});
+			}
+		});
+
+	}
+	
+	//-----------------
+	
 });

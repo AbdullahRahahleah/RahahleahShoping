@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import Rahahleah.RahShopping.util.FileUploadUtility;
@@ -70,8 +72,19 @@ public class ManagmentController {
 	public String handleProductSubmission(@Valid @ModelAttribute("product") Product mProduct,BindingResult results, Model model,
 			HttpServletRequest request ){
 		
-		//to Add spring validator on the uploaded file using (productValidator.java)
-		new ProductValidator().validate(mProduct, results);
+		
+		
+		if(mProduct.getId()==0) {
+			//just to deal with the new product
+			//to Add spring validator on the uploaded file using (productValidator.java)
+			new ProductValidator().validate(mProduct, results);
+		}
+		else {
+			//if the existing product doesn't has an image then we need to validate
+			if(!mProduct.getFile().getOriginalFilename().equals("")){
+				new ProductValidator().validate(mProduct, results);
+			}
+		}
 				
 		
 		//check if there are any errors from validation which we put in proudct.java class @NotBlank..etc
@@ -84,8 +97,16 @@ public class ManagmentController {
 		
 		logger.info(mProduct.toString());
 		
-		//create a new product record
-		productDAO.add(mProduct);
+		//to update an existing product (update)
+		if(mProduct.getId()==0){
+			//create a new product record
+			productDAO.add(mProduct);
+		}
+		else {
+			//update existing product
+			productDAO.update(mProduct);
+		}
+		
 		
 		
 		//Just to check we have attached a file then attach the file using our method 
@@ -101,6 +122,22 @@ public class ManagmentController {
 		return "redirect:/manage/products?operation=product";
 	}
 	
+	//called from myapp.js at ($.post(activationUrl,function(data){)
+	@RequestMapping(value="/product/{id}/activation",method=RequestMethod.POST)
+	@ResponseBody
+	public String handleProductActivation(@PathVariable int id)  {
+		//to fetch the product from DB
+		Product product=productDAO.get(id);
+		boolean isActive=product.isActive();
+		//to Activate and deactivate the product 
+		product.setActive(!isActive);
+		
+		productDAO.update(product);
+		
+		return (isActive)
+				?"You have succesfully deactivated the product with Id"+ product.getId()
+				:"You have succesfully activated the product with Id"  + product.getId();
+	}
 	
 	//categories for all the request mapping
 	@ModelAttribute("categories")
@@ -108,4 +145,18 @@ public class ManagmentController {
 		return categoryDAO.list();
 	}
 	
+	// here to show the product in edit mode in manage product
+	@RequestMapping(value="/{id}/product",method=RequestMethod.GET)
+	public ModelAndView showEditProducts(@PathVariable int id) {
+		//operation read from Post method	
+		ModelAndView mv=new ModelAndView("page");		
+		mv.addObject("userClickManageProducts", true);
+		mv.addObject("title", "Manage Products");
+		
+		//fetch the product from database
+		Product nProduct=productDAO.get(id);
+		mv.addObject("product", nProduct);
+		
+		return mv;
+	}
 }

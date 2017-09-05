@@ -38,7 +38,6 @@
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
 
-
 <!-- Custom CSS -->
 <link href="${css}/myapp.css" rel="stylesheet">
 
@@ -105,6 +104,10 @@
 
 		<!--  DataTable Bootstrap script -->
 		<script src="${js}/dataTables.bootstrap.js"></script>
+
+		<!-- Use bootbox from bootboxjs.com-->
+		<script src="${js}/bootbox.min.js"></script>
+
 
 
 		<!--  Self coded javaScript -->
