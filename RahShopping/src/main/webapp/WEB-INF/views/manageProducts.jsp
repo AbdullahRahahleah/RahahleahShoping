@@ -137,6 +137,7 @@
 		<div class="col-xs-12">
 			<div style="overflow: auto">
 				<!--  Products table for Admin -->
+				<!--  filled from myapp.js -->
 				<table id="adminProductsTable"
 					class="table table-striped table-bordered">
 					<thead>
@@ -189,7 +190,7 @@
 					<div class="form-group">				
 						<label for="category_name" class="control-label col-md-4">Category Name</label>
 						<div class="col-md-8">
-							<sf:input type="text" path="name" id="category_name" class="Form-control" placeholder="Category Name"/>
+							<sf:input type="text" path="name" id="category_name" class="form-control" placeholder="Category Name"/>
 						</div>
 					</div>
 					

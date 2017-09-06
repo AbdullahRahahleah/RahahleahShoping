@@ -56,7 +56,15 @@ public class HibernateConfig {
 		properties.put("hibernate.dialect",DATABASE_DIALECT);;
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true");
-
+		
+		
+		//this property used to check, if I want to deal with a table and that table still doesn't exist so :
+		//1- create : drop the current table then recreate it.
+		//2- update : update the same table if it's eixsit.
+		
+		properties.put("hibernate.hbm2ddl.auto","create");
+		
+		
 		return properties;
 	}
 	

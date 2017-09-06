@@ -227,7 +227,7 @@ $(function() {
 							var str='';
 							//we can't read the context root by ${contextRoot} it's just read in this way in jsp file
 							str+='<a href="'+window.contextRoot+'/manage/'+data+'/product" class="btn btn-warning">';
-				 			str+='<span class="glyphicon glyphcon-pencil"><</span></a>';
+				 			str+='<span class="glyphicon glyphicon-pencil"></span></a>';
 				 			return str;
 						}
 					}

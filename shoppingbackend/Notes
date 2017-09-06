@@ -1,0 +1,4 @@
+To Create a a new feature like sign up user and you need to use CRUDE user (and communicate with DB)
+1-Create a DTO class.
+2-Create userDAO (interface).
+3-Create userDAOImpl;

@@ -10,6 +10,30 @@ import javax.persistence.Id;
 
 @Entity
 public class Category {
+	/*
+	 * Private fields 
+	 */
+	
+	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
+	private int id;
+	
+	// we don't mention the name of the related column as they have the same name 
+	private String name;
+	
+	private String description;
+	
+	//here we mentioned the name of the column on the database
+	@Column(name="IMAGE_URL")
+	private String imageURL;
+	
+	
+	@Column(name="is_active")
+	private boolean active=true;
+
+
+
+	
 	public int getId() {
 		return id;
 	}
@@ -40,31 +64,6 @@ public class Category {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	
-	/*
-	 * Private fields 
-	 */
-	
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private int id;
-	
-	// we don't mention the name of the related column as they have the same name 
-	private String name;
-	
-	private String description;
-	
-	//here we mentioned the name of the column on the database
-	@Column(name="IMAGE_URL")
-	private String imageURL;
-	
-	
-	@Column(name="is_active")
-	private boolean active=true;
-
-
-	
 	
 	//just for validation 
 	@Override
