@@ -62,7 +62,7 @@ public class HibernateConfig {
 		//1- create : drop the current table then recreate it.
 		//2- update : update the same table if it's eixsit.
 		
-		properties.put("hibernate.hbm2ddl.auto","create");
+		properties.put("hibernate.hbm2ddl.auto","update");
 		
 		
 		return properties;
