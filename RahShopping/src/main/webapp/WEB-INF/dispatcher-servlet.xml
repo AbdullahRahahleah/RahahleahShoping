@@ -64,6 +64,7 @@
 	<!--  DispatcherServlet knows how dispatch requests by consulting with one or more handler mappings. for web flows, flowhandlermapping helps dispatcherServlet know to send flow requests to the flowHandlerAdapter -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
 		<property name="flowRegistry" ref="flowRegistry"/> 
+		<property name="order" value="-1"></property>
 	</bean>
 	
 	<!--  for resolving views fow web flow, this bean will point to the view resolved -->

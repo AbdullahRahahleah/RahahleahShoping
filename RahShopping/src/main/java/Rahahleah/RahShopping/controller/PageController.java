@@ -164,7 +164,22 @@ public class PageController {
 		return mv;
 	}
 	*/
-	
+	/*
+	 * Webflow + requestMapping
+	 * 
+	// having simillar mapping to our flow id 
+	//We have added a proprty to dispatcher-servlet.xml which force the system to deal with the flow configuration not with requestmapping 
+	//proprty is <property name="order" value="-1"></property>
+	@RequestMapping(value="/register")
+	public ModelAndView showSingleProduct() {
+		ModelAndView mv= new ModelAndView("page");
+		//to add parameter to Model (Array), then we can read it from page.jsp page
+		mv.addObject("title","Contact Us");	
+		return mv;
+		
+		
+	}
+	*/
 	
 	
 }

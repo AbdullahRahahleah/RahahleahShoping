@@ -1,5 +1,7 @@
 package Rahahleah.shopingbackend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
-public class Address {
+public class Address implements Serializable{
 
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -32,15 +41,27 @@ public class Address {
 	}
 	*/
 	@Column(name="address_line_one")
+	@NotBlank(message="please Enter Address Line one !")
 	private String addressLineOne;
+	
 	@Column(name="address_line_two")
+	@NotBlank(message="please Enter Address Line Two!")
 	private String addressLineTwo;
+	
+	@NotBlank(message="please Enter City!")
 	private String city;
+	
+	@NotBlank(message="please Enter State!")
 	private String state;
+	
+	@NotBlank(message="please Enter Country!")
 	private String country;
+	
 	@Column(name="postal_code")
+	@NotBlank(message="please Enter Postal code!")
 	private String postalCode;
-	@Column(name="is_shipping")
+	
+	@Column(name="is_shipping")	
 	private boolean shipping;
 	@Column(name="is_billing")
 	private boolean billing;

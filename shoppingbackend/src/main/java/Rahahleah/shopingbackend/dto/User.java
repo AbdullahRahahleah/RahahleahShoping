@@ -1,5 +1,7 @@
 package Rahahleah.shopingbackend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,22 +11,39 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name="user_detail")
-public class User {
+public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name="first_name")
+	@NotBlank(message="please Enter First Name!")
 	private String firstName;
+	
 	@Column(name="last_name")
+	@NotBlank(message="please Enter Last Name!")
 	private String lastName;
+	
+	@NotBlank(message="please Enter Email address!")
 	private String email;
+	
 	@Column(name="contact_number")
+	@NotBlank(message="please Enter Contact Number!")
 	private String contactNumber;
+	
 	private String role;
+	@NotBlank(message="please Enter Password!")
 	private String password;
+	
 	private boolean enabled=true;
 	
 	
