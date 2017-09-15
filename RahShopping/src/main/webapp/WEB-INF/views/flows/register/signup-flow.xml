@@ -18,12 +18,16 @@
 	
 	<!-- is the start state  -->
 	<view-state id="personal" view="flows/register/signup-personal"  model="user" >
-		<transition on="billing" to="billing" />
+		<transition on="billing" to="validate" />
 		<on-exit>
 			<evaluate expression="registerHandler.addUser(flowScope.registerModel,user)"></evaluate>
 		</on-exit>
 	</view-state>
-	
+	<action-state id="validate">
+		<evaluate expression="registerHandler.validateUser(user,messageContext)"></evaluate>
+		<transition on="success" to="billing"></transition>
+		<transition on="failure" to="personal"></transition>
+	</action-state> 
 	<!--  on click on this action (personal) go to view name personal -->
 	<view-state id="billing" view="flows/register/signup-billing" model="billing" >
 		<transition on="personal" to ="personal"></transition>
@@ -39,7 +43,7 @@
 		<transition on="billing" to ="billing"></transition>
 		<transition on="submit" to ="submit"></transition>		
 	</view-state>
-	
+	<!-- this action state will be used in the signup-confirm  -->
 	<action-state id="submit">
 		<evaluate expression="registerHandler.saveAll(flowScope.registerModel)"></evaluate>
 		<transition on="success" to="success" ></transition>
@@ -52,6 +56,6 @@
 	
 	<!--  global transition -->
 	<global-transitions>
-	 <transition on="home" to="home"></transition>
+	 <transition on="home" to="home" validate="false"></transition>
 	</global-transitions>
 </flow>

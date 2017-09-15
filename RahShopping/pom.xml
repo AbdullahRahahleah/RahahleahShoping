@@ -10,6 +10,7 @@
 	<properties>
 		<javaee.version>7.0</javaee.version>
 		<spring.version>4.3.6.RELEASE</spring.version>
+		<spring.scurity.version>4.2.2.RELEASE</spring.scurity.version>
 	</properties>
 
 	<dependencies>
@@ -73,6 +74,28 @@
 			<artifactId>spring-webflow</artifactId>
 			<version>2.4.4.RELEASE</version>
 		</dependency>
+		
+		<!-- Spring Secuirty -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.scurity.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.scurity.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.scurity.version}</version>
+		</dependency>
+		<!-- Spring Secuirty -->
+		
+		
 	</dependencies>
 	<build>
 		<plugins>

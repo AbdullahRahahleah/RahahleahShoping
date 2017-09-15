@@ -58,6 +58,7 @@
 	</div>
 </div>
 <!--  to provide the confirm button after displaying the details -->
+<!--  this submit button will run the submit action-view -->
 	<div class="row">
 		<div class="col-sm-4 col-sm-offset-4">
 

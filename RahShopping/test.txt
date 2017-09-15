@@ -10,3 +10,16 @@ Using bootstrap part 02-05
 4- in dispatcher-servlet you need to add mvc namespace
 
 *you can use the site (bootswatch.com) to get bootstrap themes
+
+
+* We have three types of validation :
+1-Hibernate validation liek adding ( @NotBlank(message="please Enter Password!") in user.java (dto)
+
+2-Spring validation like (Rahahleah.RahShopping.validator.ProductValidator.validate(Object, Errors))
+which used in the managmentController at line (new ProductValidator().validate(mProduct, results);)
+
+3-JqueryValidation in myapp.js
+$categoryForm.validate({
+
+*Spring Webflow basiclly used to deal with post-get-direct  
+

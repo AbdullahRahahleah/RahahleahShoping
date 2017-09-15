@@ -20,7 +20,7 @@
    ">
    <!--  To scan every component  -->
 	<context:component-scan base-package="Rahahleah.RahShopping"></context:component-scan>
-	<context:component-scan base-package="Rahahleah.shoppingbackend"></context:component-scan>
+
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -54,8 +54,8 @@
 		<wf:flow-location-pattern value="/**/*-flow.xml"/>
 	</wf:flow-registry> 
 	<!--  to customize the flow regiestry  -->
-	<wf:flow-builder-services id="flowBuilderServices"
-	 view-factory-creator="viewFactoryCreator"	/>
+	<wf:flow-builder-services id="flowBuilderServices"	 view-factory-creator="viewFactoryCreator"	
+	validator="validator"/>
 	<!-- this handler adapter is the bridge between dispatcherServlet and the flow executor, handling requests and mainpulating the flow based on those requests -->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
 		<property name="flowExecutor" ref="flowExecutor"></property>
@@ -72,4 +72,5 @@
 		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
 		<property name="viewResolvers" ref="viewResolver"/>			
 	</bean>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 </beans>

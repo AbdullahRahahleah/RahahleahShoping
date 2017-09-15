@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import Rahahleah.RahShopping.exception.ProductNotFoundException;
@@ -180,6 +181,18 @@ public class PageController {
 		
 	}
 	*/
+	//login spring secuirty, we define the URL in the spring-security.xml <form-login
+	@RequestMapping(value="/login")
+	public ModelAndView showSingleProduct(@RequestParam(name ="error",required=false)String error) {
+		ModelAndView mv= new ModelAndView("login");
+		//to add parameter to Model (Array), then we can read it from page.jsp page
+		if(error!=null){
+			mv.addObject("message", "Invalid User name and-or password!");
+		}
+		
+		mv.addObject("title","Login");	
+		return mv;
+	}
 	
 	
 }
