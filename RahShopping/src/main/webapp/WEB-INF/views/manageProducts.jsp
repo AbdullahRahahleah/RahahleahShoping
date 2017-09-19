@@ -132,10 +132,11 @@
 			<h3>Available Products</h3>
 			<hr />
 
-		</div>
-
+		</div>	
 		<div class="col-xs-12">
-			<div style="overflow: auto">
+		<!--  those two divs added to make the table responsive -->
+			<div class="container-fluid">
+				<div class="table-responsive">
 				<!--  Products table for Admin -->
 				<!--  filled from myapp.js -->
 				<table id="adminProductsTable"
@@ -166,7 +167,11 @@
 						</tr>
 					</tfoot>
 				</table>
+				
+				</div>			
+			
 			</div>
+				
 		</div>
 	</div>
 

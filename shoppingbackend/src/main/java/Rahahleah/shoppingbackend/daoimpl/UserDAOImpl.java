@@ -2,6 +2,8 @@ package Rahahleah.shoppingbackend.daoimpl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -65,7 +67,11 @@ public class UserDAOImpl implements UserDAO {
 		String selectQuery="FROM User WHERE email = :email";
 		try {
 			return sessionFactory.getCurrentSession().createQuery(selectQuery,User.class).setParameter("email", email).getSingleResult();
-		} catch (Exception e) {
+		}catch (NoResultException e){
+			//No need to print the stack trace if we didn't find a results
+		//	e.printStackTrace();
+			return null;
+		}catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}

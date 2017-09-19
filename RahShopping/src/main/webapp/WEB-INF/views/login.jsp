@@ -75,7 +75,17 @@
 							<div class="alert alert-danger">${message}</div>
 					</div>
 					</div>
-				</c:if>		
+				</c:if>	
+				
+				<!--  This will be displayed only When user Logged out -->
+				<c:if test="${not empty logout}">
+					<div class="row">
+						<div class="col-md-offset-3 col-md-6">
+							<div class="alert alert-success">${logout}</div>
+					</div>
+					</div>
+				</c:if>	
+
 				<div class="row">
 					<div class="col-md-offset-3 col-md-6">
 						<div class="panel panel-primary">
