@@ -134,7 +134,7 @@
 
 		</div>	
 		<div class="col-xs-12">
-		<!--  those two divs added to make the table responsive -->
+		<!--  those two divs added to make the table responsive s-->
 			<div class="container-fluid">
 				<div class="table-responsive">
 				<!--  Products table for Admin -->
