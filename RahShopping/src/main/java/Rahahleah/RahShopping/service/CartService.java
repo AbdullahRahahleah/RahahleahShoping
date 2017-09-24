@@ -12,6 +12,7 @@ import Rahahleah.shopingbackend.dto.Cart;
 import Rahahleah.shopingbackend.dto.CartLine;
 import Rahahleah.shopingbackend.dto.Product;
 import Rahahleah.shoppingbackend.dao.CartLineDAO;
+import Rahahleah.shoppingbackend.dao.ProductDAO;
 
 @Service("cartService")
 public class CartService {
@@ -22,6 +23,8 @@ public class CartService {
 	@Autowired
 	private HttpSession session;
 	
+	@Autowired
+	private ProductDAO productDAO;
 	//return the cart of the user who has logged in
 	private Cart getCart() {
 		return ((UserModel)session.getAttribute("userModel")).getCart();
@@ -54,6 +57,51 @@ public class CartService {
 			return "result=updated";
 		}
 		
+	}
+	public String deleteCartLine(int cartLineId) {
+		//fetch the cartLine
+		CartLine cartLine =cartLineDAO.get(cartLineId);	
+		if(cartLine==null){
+			return "result=error";
+		}
+		else {
+			//update the cart
+			Cart cart=this.getCart();
+			cart.setGrandTotal(cart.getGrandTotal()-cartLine.getTotal());
+			cart.setCartLines(cart.getCartLines()-1);
+			cartLineDAO.updateCart(cart);
+			//remove the cart Line
+			cartLineDAO.delete(cartLine);
+			return "result=deleted";
+		}
+	}
+	public String addCartLine(int productId) {
+		String response=null;
+		Cart cart= this.getCart();
+		CartLine cartLine=cartLineDAO.getByCartAndProduct(cart.getId(), productId);
+		if(cartLine==null){
+			//add the new cartLine
+			cartLine =new CartLine();
+			//fetch  the product
+			Product product=productDAO.get(productId);
+			cartLine.setCartId(cart.getId());
+			cartLine.setProduct(product);
+			cartLine.setBuyingPrice(product.getUnitPrice());
+			//because this is the first time
+			cartLine.setProductCount(1);
+			cartLine.setTotal(product.getUnitPrice());
+			cartLine.setAvailable(true);
+			cartLineDAO.add(cartLine);
+			cart.setCartLines(cart.getCartLines()+1);
+			cart.setGrandTotal(cart.getGrandTotal()+cartLine.getTotal());
+			cartLineDAO.updateCart(cart);
+			response="result=added";
+		}
+		
+		
+		
+		return  response;
+
 	}
 	
 }
