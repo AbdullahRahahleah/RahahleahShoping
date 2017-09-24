@@ -20,7 +20,5 @@ public interface UserDAO {
 	Address getBillingAddress(int userId);
 	List<Address> listShippingAdresses(int userId);
 	
-	//as the cart already added by adduser method with cascade property
-	boolean updateCart(Cart cart);
 
 }

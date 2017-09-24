@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import Rahahleah.shopingbackend.dto.Cart;
 import Rahahleah.shopingbackend.dto.CartLine;
 import Rahahleah.shoppingbackend.dao.CartLineDAO;
 
@@ -75,14 +76,38 @@ public class CartLineDAOImpl implements CartLineDAO{
 
 	@Override
 	public List<CartLine> listAvailable(int cartId) {
-		// TODO Auto-generated method stub
-		return null;
+		String query="FROM CartLine WHERE cartId=:cartId AND available=:available";
+		return sessionFactory.getCurrentSession()
+				.createQuery(query,CartLine.class)
+				.setParameter("cartId", cartId)
+				.setParameter("available", true)
+				.getResultList();
 	}
 
 	@Override
 	public CartLine getByCartAndProduct(int cartId, int productId) {
-		// TODO Auto-generated method stub
-		return null;
+		String query="FROM CartLine WHERE cartId=:cartId AND product.id=:productId";
+		try {
+		return sessionFactory.getCurrentSession()
+				.createQuery(query,CartLine.class)
+				.setParameter("cartId", cartId)
+				.setParameter("productId", productId)
+				.getSingleResult();
+		}
+		catch (Exception ex) {
+			return null;
+		}
+	}
+	@Override
+	public boolean updateCart(Cart cart) {
+		try {
+			sessionFactory.getCurrentSession().update(cart);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
